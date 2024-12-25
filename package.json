@@ -1,0 +1,26 @@
+{
+    "name": "snake-ts",
+    "version": "1.0.0",
+    "description": "",
+    "homepage": "https://github.com/wolfdev07/snake-game#readme",
+    "bugs": {
+        "url": "https://github.com/wolfdev07/snake-game/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/wolfdev07/snake-game.git"
+    },
+    "license": "ISC",
+    "author": "Arthur Wolf",
+    "type": "commonjs",
+    "main": "index.js",
+    "scripts": {
+        "build": "tsc && cpx './public/**/*' dist/public/",
+        "start": "http-server dist/public"
+    },
+    "devDependencies": {
+        "cpx": "^1.5.0",
+        "live-server": "^1.2.2",
+        "typescript": "^5.7.2"
+    }
+}
