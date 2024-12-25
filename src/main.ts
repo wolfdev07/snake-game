@@ -1,24 +1,40 @@
-import './style.css'
-import typescriptLogo from './typescript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.ts'
+import { Board } from "./game/board";
+import { Snake } from "./game/snake";
+import { Food } from "./game/food";
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
-  </div>
-`
+// Configuración inicial
+const board = new Board("gameCanvas", 400, 400);
+const snake = new Snake(20);
+const food = new Food(20);
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+food.spawn(board.getCanvas().width, board.getCanvas().height);
+
+function gameLoop() {
+  board.clear();
+  snake.move();
+  snake.draw(board.getContext());
+  food.draw(board.getContext());
+
+  requestAnimationFrame(gameLoop);
+}
+
+// Listeners para cambiar la dirección
+document.addEventListener("keydown", (event) => {
+  switch(event.key) 
+  {
+    case "ArrowUp":
+      snake.setDirection(0, -1);
+      break;
+    case "ArrowDown":
+      snake.setDirection(0, 1);
+      break;
+    case "ArrowLeft":
+      snake.setDirection(-1, 0);
+      break;
+    case "ArrowRight":
+      snake.setDirection(1, 0);
+      break;
+  }
+});
+
+gameLoop();
