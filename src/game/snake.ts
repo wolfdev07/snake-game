@@ -16,14 +16,12 @@ export class Snake {
       x: head.x + this.direction.x,
       y: head.y + this.direction.y
     }
-
     this.body.unshift(newHead);
     this.body.pop();
   }
 
   draw(ctx: CanvasRenderingContext2D): void {
     ctx.fillStyle = "lime";
-    
     this.body.forEach((segment) => {
       ctx.fillRect(segment.x * this.size, segment.y * this.size, this.size, this.size);
     });
